@@ -6,27 +6,27 @@ on:
 jobs:
   ci:
     name: Continuous Integration
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
       - name: "Init repository"
-        uses: action/checkout@v3
-
+        uses: actions/checkout@v3
+      
       - name: "Init node"
-        uses: action/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: '19'
 
       - name: "Install dependencies"
-        uses: npm install
-        
+        run: npm install
+
       - name: "Run tests"
-        uses: npm run test
+        run: npm run test
 
       - name: "Run eslint"
-        uses: npx eslint index.js
+        run: npx eslint index.js
 
       - name: "Publish to NPMJS"
-        uses: JS-DevTools/npm/publish@v2
-        with: 
+        uses: JS-DevTools/npm-publish@v2
+        with:
           token: ${{ secrets.NPM_TOKEN }}
