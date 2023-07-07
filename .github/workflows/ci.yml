@@ -1,0 +1,30 @@
+name: Continuous Integration
+
+on:
+  push:
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs: ubuntu-lastest
+
+    steps:
+    - name: "Init repository"
+      uses: action/checkout@v3
+
+    - name: "Init node"
+      uses: action/setup-node@v3
+
+    - name: "Install dependencies"
+      uses: npm install
+      
+    - name: "Run tests"
+      uses: npm run test
+
+    - name: "Run eslint"
+      uses: npx eslint index.js
+
+    - name: "Publish to NPMJS"
+      uses: JS-DevTools/npm/publish@v2
+      with: 
+        token: ${{ secrets.NPM_TOKEN }}
