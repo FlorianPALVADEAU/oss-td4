@@ -1,5 +1,4 @@
 name: Continuous Integration
-
 on:
   push:
 
@@ -11,11 +10,11 @@ jobs:
     steps:
       - name: "Init repository"
         uses: actions/checkout@v3
-      
+
       - name: "Init node"
         uses: actions/setup-node@v3
         with:
-          node-version: '19'
+          node-version: "19"
 
       - name: "Install dependencies"
         run: npm install
